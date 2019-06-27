@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>对象的深复制</title>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			"use strict"
+			//第一种方法  使用JSON里面的方法
+
+			let obj = {
+				"a": 1,
+				"b": {
+					"c": 2
+				}
+			}
+			let obj1 = JSON.parse(JSON.stringify(obj))
+			//缺陷是不能将不可枚举数据进行复制
+			//只适用于数据较少的时间
+
+			//第二种方法使用迭代的方法
+
+/*			function deepcopy(obj, obj1) {
+				//let obj1 = {}
+
+				for(let k in obj) {
+					if(typeof obj[k] === 'object') {
+						obj1 = {}
+						deepcopy(obj[k], obj1[k])
+					} else {
+						obj1[k] = obj[k]
+					}
+				}
+			}
+
+			let obj2 = {}
+			deepcopy(obj, obj2)
+
+			console.log(obj2)*/
+
+			function deepClone(o1, o2) {
+				for(let k in o2) {
+					if(typeof o2[k] === 'object') {
+						o1[k] = {};
+						deepClone(o1[k], o2[k]);
+					} else {
+						o1[k] = o2[k];
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

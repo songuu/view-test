@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>简单的实现圆形</title>
+
+		<style type="text/css">
+			.disc {
+				width: 100px;
+				height: 100px;
+				background-color: dimgray;
+				border-radius: 50%;
+				cursor: pointer;
+				position: absolute;
+				left: 50px;
+				top: 50px;
+				line-height: 100px;
+				text-align: center;
+				color: white;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div>
+			<img src="../img/23.jpg" width="1366" height="768" border="0" usemap="#Map" />
+			<map name="Map" id="Map">
+	 			<area shape="circle" coords="821,289,68" href="www.baidu.com" target="_blank" />
+			</map>
+		</div>
+		<div>
+			<div class="disc">circle</div>
+		</div>
+		<script type="text/javascript">
+			
+			document.onclick = function(e) {  
+				var r = 50; 
+				var x1 = 100;
+				var y1 = 100;
+				var x2= e.clientX;
+				var y2= e.clientY;  
+				var distance = Math.abs(Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)));  
+				if (distance <= 50)
+					alert("Yes!");  
+			}
+		</script>
+	</body>
+
+</html>

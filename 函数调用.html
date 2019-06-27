@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			function Foo() {
+				getName = function() {
+					console.log(1);
+				}
+				return this
+			}
+			Foo.getName = function() {
+				console.log(2);
+			}
+			Foo.prototype.getName = function() {
+				console.log(3);
+			}
+			var getName = function() {
+				console.log(4);
+			}  //函数表达式
+
+			function getName() {
+				console.log(5);
+			}  //函数声明
+
+			// 输出值
+			Foo.getName(); //2
+			//  寻找Foo上面的静态方法或者静态属性
+			
+			
+			getName(); //4
+			//变量的提升  
+			//函数提升的优先级先于变量
+			/*
+			预编译期间：对本代码块中的所有 声明变量 和 函数进行处理(类似于 C语言的编译) ，但需要注意，
+				1.此时处理函数的只是 声明式函数
+				2.变量也只是进行了声明但是没有进行初始化和赋值
+			编译期间：从上到下 编译 代码块 			 
+			*/
+			/*
+			函数声明被放在了预编译阶段。
+			后来的会覆盖前面的。		 
+			*/
+			/*
+			 实际运行过程
+			 顺序变化
+			 var getName;
+			 
+			 function getName() {};
+			 
+			 getName = function() {};
+			 			 			 
+			 */
+			
+			Foo().getName(); //1
+			
+			
+			getName(); //1 
+			/*
+			  Foo().getName() => window.getName()  //更新getName() 
+			*/
+			
+			
+			new Foo.getName() //2
+			/*
+				.的优先级高于new的优先级
+				new (Foo.getName)()  //相当于执行getName的构造函数
+				=>Foo.getName()
+								
+				new (Foo().getName)()  //相当于执行内部函数getName的构造函数
+				=>getName()
+			*/
+			
+			new Foo().getName() //3
+			/*
+				(new Foo()).getName()
+				
+				此时直接在Foo函数内部找不到getName()(没有绑定getName())
+				所以就去Foo的原型上面去找
+				
+				//第一种
+				function A() {
+    				this.a = 2;
+    				function B() {
+        				this.a = 1;
+    				}
+    				return B();
+				}
+				console.log(new A()); {a: 2}
+				//第二种
+				function A() {
+    				this.a = 2;
+    				function B() {
+        				this.a = 1;
+    				}
+    				return new B();
+				}
+				console.log(new A()); {a: 1}
+			*/
+			new new Foo().getName() //3
+			/*
+				(new (new Foo()).getName()) 
+				此时使用的是getName()原型上面的构造函数
+			*/
+		</script>
+	</body>
+
+</html>

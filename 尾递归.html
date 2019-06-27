@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			(function(n) {
+				for(let i = n; i > 0; i--){
+					for(var j = 0; j < i; j++)
+						document.write(i + '   ')
+					document.write('<br/>');
+				}
+				for(let i = 2; i < n+1; i++){
+					for(let j = 0; j < i; j++)
+						document.write(i + '   ')
+					document.write('<br/>');
+				}
+			})(2);
+			let f = n => (k => n > 1 ? (k(n), f(n - 1), k(n)) : k(n))(n => console.log((n + "").repeat(n)));
+			f(4);
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			var s = 'aaabbbcccaaabbbaaa';
+			var a = s.split('').sort().join(""); //"aaaaaaaaabbbbbbccc"
+			var ans = a.match(/(\w)\1+/g);  //进行分组
+			ans.sort(function(a, b) {
+				return a.length - b.length;
+			})
+			document.write(ans)
+			document.write('ans is : ' + ans[ans.length - 1])
+		</script>
+	</body>
+
+</html>
