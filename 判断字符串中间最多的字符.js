@@ -34,4 +34,24 @@ function check1(str) {
     console.log(arr[0][0]);
 }
 
-check1("dabcabca")
+
+/* 
+网上方法2
+*/
+
+function check2(str) {
+    if(str.length <= 1) {
+        return str;
+    }
+
+    for(var i = 0, hash = {};i < str.length; i++) {
+        if(hash[str[i]]) {
+            hash[str[i]]++;
+        } else {
+            hash[str[i]] = 1;
+        }
+    }
+
+    console.log(hash)
+}
+check2("dabcabca")
